@@ -1,9 +1,25 @@
 <script>
+import { afterUpdate, beforeUpdate } from "svelte";
+
+  let scrollable;
   let klass = null;
+
   export {klass as class};
+  export let autoscroll = false;
+
+  if (autoscroll) {
+    let scroll;
+    beforeUpdate(() => {
+      scroll = scrollable && (scrollable.offsetHeight + scrollable.scrollTop) > (scrollable.scrollHeight - 20);
+    });
+
+    afterUpdate(() => {
+      if (scroll) scrollable.scrollTo(0, scrollable.scrollHeight);
+    });
+  }
 </script>
 
-<div class="scrollable {klass ?? ''}">
+<div class="scrollable {klass ?? ''}" on:click bind:this={scrollable}>
   <slot />
 </div>
 

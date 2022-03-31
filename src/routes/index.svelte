@@ -1,8 +1,7 @@
 <script>
-  import HelpMenu from '$lib/components/HelpMenu.svelte'
-  import Scrollable from '$lib/components/Scrollable.svelte'
+
   import Terminal from '$lib/Terminal.svelte'
-  import Landing from '$lib/Landing.svelte'
+
 </script>
 
 <style type="text/scss">
@@ -14,9 +13,5 @@
 </style>
 
 <div class="app-container">
-  <HelpMenu></HelpMenu>
-  <Scrollable class="p-2">
-    <Landing></Landing>
-    <Terminal></Terminal>
-  </Scrollable>
+  <Terminal></Terminal>
 </div>

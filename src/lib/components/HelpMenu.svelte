@@ -1,19 +1,30 @@
 <script>
-  // https://dev.to/mohamadharith/workaround-for-bubbling-custom-events-in-svelte-3khk
-  import { custom_event } from "svelte/internal";
-
   let klass = null;
   export {klass as class};
 
-  let open = false;
+  let open = true;
 
-  let ref;
 
-  let dispatchEvent = (cmd) => {
-    console.log('dispatching...', cmd)
-    let evt = custom_event('type-command', cmd, true);
-    ref.dispatchEvent(evt)
-  }
+  // // https://dev.to/mohamadharith/workaround-for-bubbling-custom-events-in-svelte-3khk
+  // import { custom_event } from "svelte/internal";
+
+
+  // let ref;
+
+  // let dispatchEvent = (cmd) => {
+  //   let evt = custom_event('help-click', cmd, true);
+  //   console.log('dispatching...', {evt})
+  //   ref.dispatchEvent(evt)
+  // }
+
+  import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+  function dispatchEvent(cmd) {
+		dispatch('help-click', {
+			cmd: cmd
+		});
+	}
 </script>
 
 
@@ -109,7 +120,7 @@
   }
 </style>
 
-<div class="help-top-container" bind:this={ref}>
+<div class="help-top-container">
   <div class="help-right-container">
     <div class="help-menu">
       <div class="icon main" on:click={() => open = !open}>?</div>
