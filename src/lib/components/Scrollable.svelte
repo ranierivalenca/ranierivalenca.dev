@@ -19,7 +19,7 @@ import { afterUpdate, beforeUpdate } from "svelte";
   }
 </script>
 
-<div class="scrollable {klass ?? ''}" on:click bind:this={scrollable}>
+<div class="scrollable {klass ?? ''}" on:click on:dblclick on:mousedown bind:this={scrollable}>
   <slot />
 </div>
 

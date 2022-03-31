@@ -1,6 +1,3 @@
-<script>
-  // import Typewriter from 'svelte-typewriter'
-</script>
 
 <p>
   Welcome to my terminal.
@@ -11,8 +8,6 @@
 <p>
   The commands will be <span class="highlight">highlighted</span> and can also be clicked. Feel free to explore and find easter eggs 🙃
 </p>
-
-
 <style type="text/scss">
 span.highlight {
   @apply bg-emerald-200 text-slate-800;

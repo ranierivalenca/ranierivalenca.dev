@@ -2,7 +2,7 @@
   let klass = null;
   export {klass as class};
 
-  let open = true;
+  let open = false;
 
 
   // // https://dev.to/mohamadharith/workaround-for-bubbling-custom-events-in-svelte-3khk

@@ -92,7 +92,9 @@
   }
 
   let handleClick = (evt) => {
-    inputEl.focus();
+    inputEl.focus({
+      preventScroll: true
+    });
   }
 
   let handleCommandClick = async (evt) => {
@@ -105,7 +107,12 @@
 
 
 
+  let inputing = false
   let execCommand = async (cmd) => {
+    if (inputing) {
+      return
+    }
+    inputing = true
     commandInput = ''
     for (let l of cmd) {
       commandInput += l
@@ -113,6 +120,7 @@
     }
     await sleep(150)
     exec()
+    inputing = false
   }
 
   let exec = async (evt) => {
