@@ -2,11 +2,10 @@
   // https://dev.to/mohamadharith/workaround-for-bubbling-custom-events-in-svelte-3khk
   import { custom_event } from "svelte/internal";
 
-  export let cmd;
-  export let text;
-  export let klass;
+  let klass = null;
+  export {klass as class};
 
-  let showHelp = false;
+  let open = false;
 
   let ref;
 
@@ -20,19 +19,19 @@
 
 <style type="text/scss">
   .help-top-container {
+    $total_icons: 6;
+    $radius: 8rem;
     @apply container left-1/2 -translate-x-1/2 absolute z-20;
     .help-right-container {
       @apply absolute h-screen right-6;
       .help-menu {
         @apply text-white;
         @apply font-mono;
-        @apply absolute top-1/2 right-0;
+        @apply absolute top-1/3 right-0;
         * {
           @apply transition-all duration-500;
         }
         .connected-icon {
-          $total_icons: 6;
-          $radius: 10rem;
           @for $i from 1 through $total_icons {
             $angle: calc(($i - 1) * 180deg / ($total_icons - 1));
             &:nth-child(#{$i}) {
@@ -45,12 +44,13 @@
                 }
               }
               &::before {
-                // transition: width, transform;
-                @apply transition-all;
-                @apply duration-500;
                 content: ' ';
-                @apply bg-slate-200 h-2 opacity-30;
-                @apply absolute top-5 right-6 -z-10;
+
+                @apply transition-all duration-500;
+                @apply bg-slate-200 opacity-30;
+                @apply absolute top-6 right-6 -z-10;
+
+                height: 1px;
                 width: 0;
                 transform-origin: right;
                 transform: rotate(90 - $angle);
@@ -112,39 +112,39 @@
 <div class="help-top-container" bind:this={ref}>
   <div class="help-right-container">
     <div class="help-menu">
-      <div class="icon main" on:click={() => showHelp = !showHelp}>?</div>
+      <div class="icon main" on:click={() => open = !open}>?</div>
       <div>
-        <div class="connected-icon" class:active={showHelp}>
+        <div class="connected-icon" class:active={open}>
           <div class="icon" on:click|preventDefault={() => dispatchEvent('help')}>
             <span class="short">hlp</span>
             <span class="full">help</span>
           </div>
         </div>
-        <div class="connected-icon" class:active={showHelp}>
+        <div class="connected-icon" class:active={open}>
           <div class="icon" on:click|preventDefault={() => dispatchEvent('whoami')}>
             <span class="short">who</span>
             <span class="full">whoami</span>
           </div>
         </div>
-        <div class="connected-icon" class:active={showHelp}>
+        <div class="connected-icon" class:active={open}>
           <div class="icon" on:click|preventDefault={() => dispatchEvent('skills')}>
             <span class="short">skl</span>
             <span class="full">skills</span>
           </div>
         </div>
-        <div class="connected-icon" class:active={showHelp}>
+        <div class="connected-icon" class:active={open}>
           <div class="icon" on:click|preventDefault={() => dispatchEvent('tech')}>
             <span class="short">tec</span>
             <span class="full">tech</span>
           </div>
         </div>
-        <div class="connected-icon" class:active={showHelp}>
+        <div class="connected-icon" class:active={open}>
           <div class="icon" on:click|preventDefault={() => dispatchEvent('courses')}>
             <span class="short">crs</span>
             <span class="full">courses</span>
           </div>
         </div>
-        <div class="connected-icon" class:active={showHelp}>
+        <div class="connected-icon" class:active={open}>
           <div class="icon" on:click|preventDefault={() => dispatchEvent('social')}>
             <span class="short">soc</span>
             <span class="full">social</span>

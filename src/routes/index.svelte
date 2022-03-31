@@ -15,7 +15,7 @@
 
 <div class="app-container">
   <HelpMenu></HelpMenu>
-  <Scrollable>
+  <Scrollable class="p-2">
     <Landing></Landing>
     <Terminal></Terminal>
   </Scrollable>

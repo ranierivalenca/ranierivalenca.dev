@@ -2,6 +2,7 @@
 	import '../app.scss';
   import Header from '$lib/Header.svelte'
   import Footer from '$lib/Footer.svelte'
+
 </script>
 
 <svelte:head>
@@ -9,9 +10,11 @@
 </svelte:head>
 
 <div id="app">
-  <Header></Header>
+  <Header class="h-12"></Header>
   <main>
-    <slot />
+    <div class="absolute bottom-0 top-12 left-0 right-0">
+      <slot />
+    </div>
   </main>
   <Footer></Footer>
 </div>
@@ -26,6 +29,7 @@
   main {
     @apply bg-gray-800;
     @apply h-full w-full;
+    @apply relative;
   }
 }
 </style>
