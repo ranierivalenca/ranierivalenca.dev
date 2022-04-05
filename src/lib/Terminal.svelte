@@ -65,7 +65,7 @@
   })
 
 	afterUpdate(() => {
-    inputEl.focus()
+    // inputEl.focus()
 	});
 
 
@@ -143,7 +143,7 @@
 
 <style type="text/scss">
   #terminal {
-    @apply p-4 font-mono text-xl;
+    @apply p-4 font-mono;
     // @apply h-full p-1 bg-gray-900 font-mono text-2xl mt-12;
     @apply relative pr-20;
     .row {

@@ -4,7 +4,8 @@
 
 <style>
   #footer {
-    @apply bg-gray-800 text-gray-100 text-sm;
+    @apply container m-auto;
+    @apply bg-neutral-900 text-gray-100 text-sm;
     @apply h-20 flex justify-center p-4;
   }
 </style>

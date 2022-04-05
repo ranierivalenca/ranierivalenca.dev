@@ -16,7 +16,9 @@
 
 <style type="text/scss">
 	#header {
+    @apply container left-1/2 -translate-x-1/2;
 		@apply w-full flex items-center p-2 justify-between fixed z-10;
-    @apply bg-gradient-to-b from-violet-600 to-violet-800 text-white;
+    @apply bg-gradient-to-b from-neutral-800 to-neutral-900 text-white;
+		@apply text-violet-500;
 	}
 </style>

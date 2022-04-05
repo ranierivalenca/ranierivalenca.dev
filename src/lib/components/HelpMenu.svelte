@@ -31,10 +31,10 @@
 <style type="text/scss">
   .help-top-container {
     $total_icons: 6;
-    $radius: 8rem;
+    $radius: 7rem;
     @apply container left-1/2 -translate-x-1/2 absolute z-20;
     .help-right-container {
-      @apply absolute h-screen right-6;
+      @apply absolute h-screen right-5;
       .help-menu {
         @apply text-white;
         @apply font-mono;
@@ -50,7 +50,7 @@
                 @apply opacity-100;
                 transform: translateY(cos($angle) * -$radius) translateX(sin($angle) * -$radius);
                 &:hover {
-                  @apply z-30 outline-offset-0;
+                  @apply z-30 outline-offset-0 outline-green-500;
                   transform: translateY(cos($angle) * -$radius) translateX(sin($angle) * -$radius) scale(2);
                 }
               }
@@ -82,7 +82,7 @@
           @apply cursor-pointer;
           @apply opacity-0;
           // @apply mix-blend-multiply shadow-md shadow-gray-400;
-          @apply outline outline-offset-2 outline-pink-500;
+          @apply outline outline-offset-2 outline-green-200;
           @apply absolute z-10 right-0;
 
           span.full {
@@ -106,6 +106,7 @@
             // @apply bg-gradient-to-t from-emerald-600 via-emerald-700 to-emerald-600;
             // @apply bg-gray-200 text-slate-800;
             @apply text-3xl font-bold;
+            @apply outline-violet-500;
             @apply z-20;
             @apply opacity-100;
             @apply scale-110;

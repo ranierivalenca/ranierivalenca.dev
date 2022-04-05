@@ -3,7 +3,7 @@
   <dd>Universidade Federal de Pernambuco (UFPE), 2010 ~ 2012</dd>
 
   <dt>BSc in Computer Science</dt>
-  <dd>Universidade Federal de Pernambuco (UFPE), 205 ~ 2009</dd>
+  <dd>Universidade Federal de Pernambuco (UFPE), 2005 ~ 2009</dd>
 </dl>
 
 <style type="text/scss">

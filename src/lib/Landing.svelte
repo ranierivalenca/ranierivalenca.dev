@@ -9,14 +9,14 @@
     @apply flex flex-col justify-center p-6 font-mono;
     img {
       @apply block m-auto mb-2;
-      @apply w-96 rounded-full border-2 shadow-lg border-white;
+      @apply w-60 rounded-full border-2 shadow-lg border-white;
     }
     h1, h2 {
       @apply block m-auto;
-      @apply text-3xl;
+      @apply text-2xl;
     }
     h2 {
-      @apply text-2xl;
+      @apply text-xl;
     }
     @apply border-b ml-4 mr-20;
   }

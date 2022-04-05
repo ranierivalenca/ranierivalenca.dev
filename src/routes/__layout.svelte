@@ -26,8 +26,8 @@
   @apply p-0;
   @apply overflow-hidden;
 
+  @apply bg-gray-800;
   main {
-    @apply bg-gray-800;
     @apply h-full w-full;
     @apply relative;
   }

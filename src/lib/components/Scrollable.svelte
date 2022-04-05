@@ -7,10 +7,11 @@ import { afterUpdate, beforeUpdate } from "svelte";
   export {klass as class};
   export let autoscroll = false;
 
+  let scroll;
   if (autoscroll) {
-    let scroll;
     beforeUpdate(() => {
-      scroll = scrollable && (scrollable.offsetHeight + scrollable.scrollTop) > (scrollable.scrollHeight - 20);
+      // scroll = scrollable && (scrollable.offsetHeight + scrollable.scrollTop) > (scrollable.scrollHeight - 20);
+      scroll = autoscroll
     });
 
     afterUpdate(() => {

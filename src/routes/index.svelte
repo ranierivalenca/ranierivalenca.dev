@@ -7,7 +7,7 @@
 <style type="text/scss">
   .app-container {
     @apply container h-full m-auto overflow-hidden;
-    @apply text-gray-300 text-lg;
+    @apply text-gray-300;
     @apply bg-slate-900;
   }
 </style>
