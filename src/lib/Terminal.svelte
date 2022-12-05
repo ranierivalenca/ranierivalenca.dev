@@ -1,57 +1,12 @@
 <script>
   import { beforeUpdate, afterUpdate, onMount, tick } from "svelte";
 
-  import Help from '$lib/commands/Help.svelte';
-  import Welcome from '$lib/commands/Welcome.svelte';
-  import Tech from '$lib/commands/Tech.svelte';
-  import Skills from '$lib/commands/Skills.svelte';
-  import Whoami from '$lib/commands/Whoami.svelte';
-  import Courses from '$lib/commands/Courses.svelte';
-  import Social from '$lib/commands/Social.svelte';
-
+  
   import HelpMenu from '$lib/components/HelpMenu.svelte'
   import Scrollable from '$lib/components/Scrollable.svelte'
   import Landing from '$lib/Landing.svelte'
 
-  const commands = {
-    'welcome': {
-      'component': Welcome
-    },
-    'tech': {
-      'component': Tech
-    },
-    'whoami': {
-      'component': Whoami
-    },
-    'help': {
-      'component': Help,
-    },
-    'skills': {
-      'component': Skills
-    },
-    'courses': {
-      'component': Courses
-    },
-    'social': {
-      'component': Social
-    },
-    'h': 'help',
-    'hello': {
-      'text': 'world?'
-    }
-  };
-
-  function command(c) {
-    console.log({commands, c})
-    if (!commands[c]) {
-      return false
-    }
-    if (typeof(commands[c]) == 'string') {
-      return command(commands[c])
-    }
-    return commands[c]
-  }
-
+  import { command } from "./Commands";
 
 
   onMount(async () => {
@@ -59,9 +14,9 @@
     // terminal.scrollTo(0, 0);
     // console.log('oiii')
     await sleep(500);
-    execCommand('welcome');
+    typeCommand('welcome');
     await sleep(500);
-    execCommand('h');
+    typeCommand('h');
   })
 
 	afterUpdate(() => {
@@ -88,7 +43,7 @@
 
 
   let handleHelpMenu = (evt) => {
-    execCommand(evt.detail.cmd);
+    typeCommand(evt.detail.cmd);
   }
 
   let handleClick = (evt) => {
@@ -102,13 +57,13 @@
     if (!cmd) {
       return
     }
-    execCommand(cmd)
+    typeCommand(cmd)
   }
 
 
 
   let inputing = false
-  let execCommand = async (cmd) => {
+  let typeCommand = async (cmd) => {
     if (inputing) {
       return
     }
@@ -123,20 +78,76 @@
     inputing = false
   }
 
+
+  const FUNCTIONS = {
+    clear: () => {
+      log = []
+    }
+  }
+
+  const clearInput = () => {
+    commandInput = ''
+  }
+  
+  const _404 = async () => {
+    const text = 'Command not found!'
+    const input = commandInput
+    const ok = true
+    log = [...log, { input }, { ok, text }]
+    clearInput()
+    await tick()
+  }
+
+  const _component = async () => {
+    const input = commandInput
+    const component = command(input).component
+    const ok = true
+    log = [...log, { input }, { ok, component }]
+    await tick()
+  }
+  
+  const _text = async () => {
+    const input = commandInput
+    const ok = true
+    const text = command(input).text
+    log = [...log, { input }, { ok, text }]
+    await tick()
+  }
+
+  const _run = async () => {
+    const input = commandInput
+    let cmd = command(input).fn
+    if (!FUNCTIONS[cmd]) {
+      _404()
+      clearInput()
+      return
+    }
+    FUNCTIONS[cmd]()
+    clearInput()
+    await tick()
+  }
+
   let exec = async (evt) => {
     console.log({commandInput});
-    log = [
-      ...log,
-      {
-        input: commandInput,
-        text: commandInput
-      },
-      {
-        cmd: commandInput
-      },
-    ];
-    commandInput = '';
-    await tick();
+    console.log(command(commandInput))
+    if (!command(commandInput)) {
+      _404()
+      return
+    }
+    if (command(commandInput).isComponent) {
+      _component()
+      clearInput()
+      return
+    }
+    if (command(commandInput).isText) {
+      _text()
+      clearInput()
+      return
+    }
+    if (command(commandInput).isFunction) {
+      _run()
+      return
+    }
   }
 
 </script>
@@ -176,16 +187,16 @@
           {#if row.input}
             <span class="text-green-500">&gt</span>
             <span>{row.input}</span>
-          {:else if row.cmd in commands}
+          {:else if row.ok}
             <div class="command-result">
-              {#if command(row.cmd).component}
-                <svelte:component this={command(row.cmd).component} />
-              {:else if command(row.cmd).text}
-                {command(row.cmd).text}
+              {#if row.component}
+                <svelte:component this={row.component} />
+              {:else if row.text}
+                {row.text}
               {/if}
             </div>
-          {:else if row.cmd}
-            <strong>Command not found!</strong>
+          <!-- {:else if row.}
+            <strong>Command not found!</strong> -->
           {:else}
             <span>{row.text ?? row}</span>
           {/if}

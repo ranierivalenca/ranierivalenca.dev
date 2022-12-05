@@ -11,7 +11,7 @@
 
   let commandClick = () => {
     console.log('dispatching...', cmd)
-    let evt = custom_event('command-click', cmd, true);
+    let evt = custom_event('command-click', cmd, { bubbles: true });
     ref.dispatchEvent(evt)
     // dispatch('command', cmd)
   }
