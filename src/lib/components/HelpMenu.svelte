@@ -82,7 +82,8 @@
           @apply cursor-pointer;
           @apply opacity-0;
           // @apply mix-blend-multiply shadow-md shadow-gray-400;
-          @apply outline outline-offset-2 outline-green-200;
+          // @apply outline outline-offset-2 outline-green-200;
+          @apply border-4 border-green-200;
           @apply absolute z-10 right-0;
 
           span.full {
@@ -106,7 +107,8 @@
             // @apply bg-gradient-to-t from-emerald-600 via-emerald-700 to-emerald-600;
             // @apply bg-gray-200 text-slate-800;
             @apply text-3xl font-bold;
-            @apply outline-violet-500;
+            // @apply outline-violet-500;
+            @apply border-violet-500;
             @apply z-20;
             @apply opacity-100;
             @apply scale-110;
